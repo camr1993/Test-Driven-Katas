@@ -2,21 +2,26 @@ const line = "Lorem ipsum dolor sit eu amet, elit na magna sem amet nulla vel pu
 
 const wrap = (line, maxLen) => {
   let split = line.split(' ');
-  let currentLineLength = 0;
-  return split.reduce((accum,current) => {
-    if (accum.length + ' '.length + current.length > 20) {
+  let currentLineLength = split[0].length;
+
+  return split.reduce((accum, current) => {
+
+    if (currentLineLength + ' '.length + current.length > maxLen) {
       accum += ('\n' + current);
-      currentLineLength = current.length;
+      currentLineLength = (current.length + ' '.length);
+      console.log('if current length', currentLineLength);
     }
     else {
       accum += (' ' + current);
-      currentLineLength += accum;
+      currentLineLength += (current.length + ' '.length);
+      console.log('CURRENT WORD', current);
+      console.log('else current length', currentLineLength);
     }
     return accum;
   })
 }
 
+
 console.log(wrap(line, 20));
-
-
 module.exports = wrap;
+
